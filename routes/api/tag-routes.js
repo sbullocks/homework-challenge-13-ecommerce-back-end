@@ -4,23 +4,49 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   // Find all tags.
   // Be sure to include its associated Product data.
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
-  
+  try {
+    const tagData = await Tag.findAll({
+      include: [{ model: Product, through: ProductTag,
+        attributes: ['id', 'product_name', 'price', 'stock'],
+      }]
+    });
+    res.status(200).json(tagData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // Find a single tag by its `id`.
   // Be sure to include its associated Product data.
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
+  try {
+    const tagData = await Tag.findByPk(req.params.id, {
+      include: [{ model: Product, through: ProductTag,
+        attributes: ['id', 'product_name', 'price', 'stock'],
+      }]
+    });
+
+    if (!tagData) {
+      res.status(404).json({ message: 'No category was found with the specified id.' });
+      return;
+    }
+
+    res.status(200).json(tagData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.post('/', (req, res) => {
   // Creates a new tag.
+  
 });
 
 router.put('/:id', (req, res) => {
