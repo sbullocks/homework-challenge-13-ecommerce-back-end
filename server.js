@@ -11,7 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-// sync sequelize models to the database, then turn on the server
+// Sync sequelize models to the database, then turn on the server.
+// force: true adds a DROP TABLE IF EXISTS before trying to create the table - if you force, existing tables will be overwritten.
 sequelize.sync({ force: false }).then(() => {
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);
