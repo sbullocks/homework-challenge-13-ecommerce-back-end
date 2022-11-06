@@ -1,23 +1,21 @@
-const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
 // Get all products.
 // Methods are asynchronous and return promises.
 // Added catch to handle specific error.
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   // Find all products.
   // Be sure to include its associated Category and Tag data.
   try {
     const productInfo = await Product.findAll({
-      attributes: ['id', 'product_name', 'price', 'stock'],
-      include: [{model: Category,
-      attributes: ['category_name'],
-    },
-  { model: Tag, through: ProductTag,
-  attributes: ['tag_name'],
-}],
+      attributes: ["id", "product_name", "price", "stock"],
+      include: [
+        { model: Category, attributes: ["category_name"] },
+        { model: Tag, through: ProductTag, attributes: ["tag_name"] },
+      ],
     });
     res.status(200).json(productInfo);
   } catch (err) {
@@ -25,14 +23,28 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get one product
-router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+// Get one product.
+router.get("/:id", async (req, res) => {
+  // Find a single product by its `id`.
+  // Be sure to include its associated Category and Tag data.
+  // Methods are asynchronous and return promises.
+  // Added catch to handle specific error.
+  try {
+    const productInfo = await Product.findByPk(req.params.id, {
+      attributes: ["id", "product_name", "price", "stock"],
+      include: [
+        { model: Category, attributes: ["category_name"] },
+        { model: Tag, through: ProductTag, attributes: ["tag_name"] },
+      ],
+    });
+    res.status(200).json(productData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -64,7 +76,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -105,7 +117,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   // delete one product by its `id` value
 });
 
