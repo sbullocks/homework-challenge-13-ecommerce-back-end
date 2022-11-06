@@ -1,3 +1,4 @@
+// Package(s) needed for this application.
 const router = require("express").Router();
 const { Product, Category, Tag, ProductTag } = require("../../models");
 
@@ -10,14 +11,14 @@ router.get("/", async (req, res) => {
   // Find all products.
   // Be sure to include its associated Category and Tag data.
   try {
-    const productInfo = await Product.findAll({
+    const productData = await Product.findAll({
       attributes: ["id", "product_name", "price", "stock"],
       include: [
         { model: Category, attributes: ["category_name"] },
         { model: Tag, through: ProductTag, attributes: ["tag_name"] },
       ],
     });
-    res.status(200).json(productInfo);
+    res.status(200).json(productData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -30,7 +31,7 @@ router.get("/:id", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const productInfo = await Product.findByPk(req.params.id, {
+    const productData = await Product.findByPk(req.params.id, {
       attributes: ["id", "product_name", "price", "stock"],
       include: [
         { model: Category, attributes: ["category_name"] },
@@ -123,17 +124,18 @@ router.delete("/:id", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const productInfo = await Product.destroy({
+    const productData = await Product.destroy({
       where: { id: req.params.id },
     });
-    if (!productInfo) {
+    if (!productData) {
       res.status(404).json({ message: "No product with this id." });
       return;
     }
-    res.status(200).json(productInfo);
+    res.status(200).json(productData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+// Exports the module.
 module.exports = router;

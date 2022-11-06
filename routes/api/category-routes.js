@@ -1,3 +1,4 @@
+// Package(s) needed for this application.
 const router = require("express").Router();
 const { Category, Product } = require("../../models");
 
@@ -9,8 +10,8 @@ router.get("/", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const catetoryInfo = await Category.findAll();
-    res.status(200).json(catetoryInfo);
+    const categoryData = await Category.findAll();
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -23,18 +24,18 @@ router.get("/:id", async (req, res) => {
   // Added catch to handle specific error.
 
   try {
-    const catetoryInfo = await Category.findByPk(req.params.id, {
+    const categoryData = await Category.findByPk(req.params.id, {
       include: [
         { model: Product, attributes: ["product_name", "price", "stock"] },
       ],
     });
-    if (!catetoryInfo) {
+    if (!categoryData) {
       res
         .status(404)
         .json({ message: "No category was found with the specified id." });
       return;
     }
-    res.status(200).json(catetoryInfo);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -48,8 +49,10 @@ router.put("/:id", (req, res) => {
   // Updates a category by its `id` value.
 });
 
+// Delete method route.
 router.delete("/:id", (req, res) => {
   // Deletes a category by its `id` value.
 });
 
+// Exports the module.
 module.exports = router;
