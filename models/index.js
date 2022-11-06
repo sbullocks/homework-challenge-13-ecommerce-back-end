@@ -32,6 +32,7 @@ Tag.belongsToMany(Product, {
   }
 })
 
+// Exports the modules.
 module.exports = {
   Product,
   Category,
