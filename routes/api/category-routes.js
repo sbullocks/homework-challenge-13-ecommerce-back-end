@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const tagData = await Tag.create(req.body);
+    const categoryData = await Tag.create(req.body);
     res.status(200).json(tagData);
   } catch (err) {
     res.status(400).json(err);
