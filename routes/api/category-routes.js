@@ -43,6 +43,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   // Creates a new category.
+  // Methods are asynchronous and return promises.
+  // Added catch to handle specific error.
   try {
     const tagData = await Tag.create(req.body);
     res.status(200).json(tagData);
@@ -53,6 +55,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   // Updates a category by its `id` value.
+  // Methods are asynchronous and return promises.
+  // Added catch to handle specific error.
   try {
     const tagData = await Tag.update(req.body, {
       where: { id: req.params.id },
@@ -70,8 +74,22 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete method route.
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   // Deletes a category by its `id` value.
+  // Methods are asynchronous and return promises.
+  // Added catch to handle specific error.
+  try {
+    const tagData = await Tag.destroy({
+      where: { id: req.params.id },
+    });
+    if (!tagData) {
+      res.status(404).json({ message: "No category with this id!" });
+      return;
+    }
+    res.status(200).json(tagData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // Exports the module.
