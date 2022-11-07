@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
   // Added catch to handle specific error.
   try {
     const categoryData = await Tag.create(req.body);
-    res.status(200).json(tagData);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -58,16 +58,16 @@ router.put("/:id", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const tagData = await Tag.update(req.body, {
+    const categoryData = await Tag.update(req.body, {
       where: { id: req.params.id },
     });
-    if (!tagData) {
+    if (!categoryData) {
       res
         .status(404)
         .json({ message: "No category was found with the specified id." });
       return;
     }
-    res.status(200).json(tagData);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -79,14 +79,14 @@ router.delete("/:id", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const tagData = await Tag.destroy({
+    const categoryData = await Tag.destroy({
       where: { id: req.params.id },
     });
-    if (!tagData) {
+    if (!categoryData) {
       res.status(404).json({ message: "No category with this id!" });
       return;
     }
-    res.status(200).json(tagData);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
