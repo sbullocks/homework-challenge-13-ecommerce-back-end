@@ -6,7 +6,7 @@
   Build the back end for an e-commerce site using the provided Express.js API and configuring it to use Sequelize so that it interacts with MySQL database.
 
   ## Table of Contents:
-  * [Repo](#repo) 
+  * [Repository](#repository) 
   * [Demo](#demo) 
   * [Installation](#installation)
   * [Usage](#usage)
@@ -17,8 +17,8 @@
   * [Username](#username)
   * [Email](#email)
 
-  ## Repo
-  Homework Challenge 13 E-Commerce Back End
+  ## Repository
+  [Homework Challenge 13 E-Commerce Back End](https://github.com/sbullocks/homework-challenge-13-ecommerce-back-end)
 
   ## Demo
   [Click Here to View Walk-Through Video](https://drive.google.com/file/d/1wRg-9MeoGZyEuPrOSyJQvhS2aiIuomJs/view)
