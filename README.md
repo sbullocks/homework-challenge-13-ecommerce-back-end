@@ -27,7 +27,7 @@
 
   ## Usage
   N/A
-  ![screenshot of terminal with question prompt and errors.](./assets/images/Screenshot%202022-11-03%20182144.png)
+  ![screenshot of DBeaver & Insomnia product table.](./assets/images/Screenshot%202022-11-07%20205522.png)
 
   ## Contribution
   N/A
