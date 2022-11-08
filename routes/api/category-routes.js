@@ -46,10 +46,10 @@ router.post("/", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const categoryData = await Tag.create(req.body);
+    const categoryData = await Category.create(req.body);
     res.status(200).json(categoryData);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
@@ -58,7 +58,7 @@ router.put("/:id", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const categoryData = await Tag.update(req.body, {
+    const categoryData = await Category.update(req.body, {
       where: { id: req.params.id },
     });
     if (!categoryData) {
@@ -79,7 +79,7 @@ router.delete("/:id", async (req, res) => {
   // Methods are asynchronous and return promises.
   // Added catch to handle specific error.
   try {
-    const categoryData = await Tag.destroy({
+    const categoryData = await Category.destroy({
       where: { id: req.params.id },
     });
     if (!categoryData) {
