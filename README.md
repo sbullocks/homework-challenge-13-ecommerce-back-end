@@ -10,6 +10,7 @@
   * [Demo](#demo) 
   * [Installation](#installation)
   * [Usage](#usage)
+  * [Screenshot](#screenshot)
   * [Contribution](#contribution)
   * [Test](#test)
   * [License](#license)
@@ -27,6 +28,8 @@
 
   ## Usage
   N/A
+
+  ## Screenshot
   ![screenshot of DBeaver & Insomnia product table.](./assets/images/Screenshot%202022-11-07%20205522.png)
 
   ## Contribution
